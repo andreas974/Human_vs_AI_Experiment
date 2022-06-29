@@ -1,0 +1,5 @@
+// The policy file in the main folder here is used by mac applications
+
+grant {
+     permission java.security.AllPermission;
+};

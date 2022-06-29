@@ -1,0 +1,1 @@
+java -Djava.policy=java.policy -jar AgentCompetition_QLearning.jar -s

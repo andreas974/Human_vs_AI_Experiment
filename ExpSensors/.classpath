@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="lib/xAffect.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/ExpCommon"/>
+	<classpathentry kind="lib" path="lib/bioplux.jar"/>
+	<classpathentry kind="lib" path="lib/bridj-0.6.2.jar"/>
+	<classpathentry kind="lib" path="lib/commons-cli-1.1.jar"/>
+	<classpathentry kind="lib" path="lib/logback-classic-1.0.0.jar"/>
+	<classpathentry kind="lib" path="lib/logback-core-1.0.0.jar"/>
+	<classpathentry kind="lib" path="lib/slf4j-api-1.7.21.jar"/>
+	<classpathentry kind="lib" path="lib/webcam-capture-0.3.10.jar"/>
+	<classpathentry kind="lib" path="lib/xuggle-xuggler-5.4.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

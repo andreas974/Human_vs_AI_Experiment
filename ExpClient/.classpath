@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/ExpCommon"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="lib/miglayout15-swing.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/ExpJPA"/>
+	<classpathentry kind="lib" path="main/recources"/>
+	<classpathentry kind="lib" path="lib/jython-2.1.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/ExpSensors"/>
+	<classpathentry kind="lib" path="lib/trident-6.3.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

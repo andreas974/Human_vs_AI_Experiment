@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="lib" path="lib/comm.jar"/>
+	<classpathentry kind="lib" path="lib/JNative.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/ExpClient"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/ExpCommon"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/ExpJPA"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/ExpServer"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="main/resources"/>
+	<classpathentry kind="lib" path="lib/steelseries-3.9.30.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/ExpSensors"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

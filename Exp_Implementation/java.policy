@@ -1,0 +1,5 @@
+// permission file in the Exp_Implementation folder is used by Windows applications
+
+grant {
+     permission java.security.AllPermission;
+};

@@ -1,0 +1,16 @@
+bin/
+build/
+*.settings
+*.class
+
+*.iml
+*.eml
+
+*.expdata
+*.orig
+*.db
+*.iml
+*.eml
+*.ipr
+*.iws
+.*/

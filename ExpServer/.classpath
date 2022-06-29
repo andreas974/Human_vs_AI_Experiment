@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/ExpCommon"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/ExpJPA"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/ExpClient"/>
+	<classpathentry kind="lib" path="lib/miglayout15-swing.jar"/>
+	<classpathentry kind="lib" path="lib/joda-time-2.2.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/ExpSensors"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
