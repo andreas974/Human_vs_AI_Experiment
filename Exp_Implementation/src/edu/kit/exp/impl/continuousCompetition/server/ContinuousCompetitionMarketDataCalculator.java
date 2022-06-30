@@ -455,8 +455,8 @@ public class ContinuousCompetitionMarketDataCalculator {
 
         oMarket = (oFirmA + oFirmB)/2;
 
-        profitFirmA = aFirmA * oFirmA * coeff_profit_duo_bertrand;
-        profitFirmB = aFirmB * oFirmB * coeff_profit_duo_bertrand;
+        profitFirmA = (aFirmA*5) * oFirmA * coeff_profit_duo_bertrand;
+        profitFirmB = (aFirmB*5) * oFirmB * coeff_profit_duo_bertrand;
 
         ContinuousCompetitionParamObject marketUpdate = new ContinuousCompetitionParamObject();
 
@@ -580,7 +580,7 @@ public class ContinuousCompetitionMarketDataCalculator {
     }
 
     private double calculateDemandFromGivenPricesInDuopoly(double p, double pOtherFirm) {
-        return (calcAlpha(2) - calcBeta(2) * p + calcGamma(2) * pOtherFirm);
+        return (calcAlpha(2) - calcBeta(2) * (p*5) + calcGamma(2) * (pOtherFirm*5));
     }
 
     private double calcAlpha(double n) {

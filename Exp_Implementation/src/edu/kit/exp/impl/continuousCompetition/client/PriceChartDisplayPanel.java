@@ -21,7 +21,7 @@ public class PriceChartDisplayPanel extends ChartDisplayPanel {
                                   Color colorFirmB, Color colorFirmC, Color colorFirmD, Color colorMarketP, boolean isDiscreteTreatment, boolean isTriopolyTreatment, boolean isQuadropolyTreatment) {
 
         super(chartWidth, chartHeight, myRole, timeStep, duration, colorFirmA, colorFirmB, colorFirmC, colorFirmD, colorMarketP, isDiscreteTreatment, isTriopolyTreatment, isQuadropolyTreatment);
-        this.p_value_max = 100;
+        this.p_value_max = 20;
         this.t_hatch_number = 20;
         this.p_hatch_number = 4;
         calcDiagramParameters();

@@ -202,7 +202,7 @@ public class AgentStrategy {
         // newAction = (int) averageMarketAction;
 
         //Check Role for Agent:
-        System.out.println("Rolle des Agenten:" + myRole);
+        //System.out.println("Rolle des Agenten:" + myRole);
 
         double profitcoefficient = 1;
         if (agentCore.isTriopolyTreatment==false){
@@ -254,7 +254,7 @@ public class AgentStrategy {
         log4j.info("Current Q-value: {}", q[state][myLastAction]);
 
         //Just to check Q-Matrix Updates
-        //printq();
+        printq();
 
 
         // newAction = (int) marketUpdate.getaFirmA();
@@ -266,10 +266,10 @@ public class AgentStrategy {
 
         //Fill array of actions of other firm
         if (myRole == 0){
-            actionsofotherfirm[countId]= marketUpdate.getaFirmB();
+            actionsofotherfirm[countId]= marketUpdate.getaFirmB()*5;
         }
         else {
-            actionsofotherfirm[countId] = marketUpdate.getaFirmA();
+            actionsofotherfirm[countId] = marketUpdate.getaFirmA()*5;
         }
 
         //just a quick check
@@ -370,7 +370,7 @@ public class AgentStrategy {
                 result = (marketUpdate.getaFirmB()+marketUpdate.getaFirmC())/2;
             }
         }*/
-        return result;
+        return result*5;
     }
 
 
@@ -444,7 +444,7 @@ public class AgentStrategy {
         //q[state][action] = (1 - parameter.alpha) * q[state][action] + parameter.alpha * (reward + parameter.delta * nextMaxQ);
 
         // Update Q-matrix cell but of maximum action
-        q[newState][getMaxActionIndex(state)] = (1 - parameter.alpha) * q[newState][action] + parameter.alpha * ((getMaxActionIndex(newState)*(60-1.8*getMaxActionIndex(newState)+1.2*newState)*1.25) + parameter.delta * nextMaxQ);
+        q[newState][getMaxActionIndex(state)] = (1 - parameter.alpha) * q[newState][action*5] + parameter.alpha * ((getMaxActionIndex(newState)*(60-1.8*getMaxActionIndex(newState)+1.2*newState)*1.25) + parameter.delta * nextMaxQ);
 
         //Update all Cells of Current State (What if Scenario for Agent)
         /*for (int i=0; i<actionSpace; i++){
@@ -472,7 +472,7 @@ public class AgentStrategy {
         // Decrease epsilon
         parameter.decreaseEpsilon(numberOfEpisodes);
 
-        return action;
+        return action/5;
     }
 
     public static class Parameter {
