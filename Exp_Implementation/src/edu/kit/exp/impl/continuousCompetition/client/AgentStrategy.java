@@ -254,7 +254,7 @@ public class AgentStrategy {
         log4j.info("Current Q-value: {}", q[state][myLastAction]);
 
         //Just to check Q-Matrix Updates
-        printq();
+        //printq();
 
 
         // newAction = (int) marketUpdate.getaFirmA();
@@ -444,7 +444,7 @@ public class AgentStrategy {
         //q[state][action] = (1 - parameter.alpha) * q[state][action] + parameter.alpha * (reward + parameter.delta * nextMaxQ);
 
         // Update Q-matrix cell but of maximum action
-        q[state][getMaxActionIndex(state)] = (1 - parameter.alpha) * q[state][action] + parameter.alpha * ((getMaxActionIndex(state)*(60-1.8*getMaxActionIndex(state)+1.2*state)*1.25) + parameter.delta * nextMaxQ);
+        q[newState][getMaxActionIndex(state)] = (1 - parameter.alpha) * q[newState][action] + parameter.alpha * ((getMaxActionIndex(newState)*(60-1.8*getMaxActionIndex(newState)+1.2*newState)*1.25) + parameter.delta * nextMaxQ);
 
         //Update all Cells of Current State (What if Scenario for Agent)
         /*for (int i=0; i<actionSpace; i++){
@@ -542,7 +542,7 @@ public class AgentStrategy {
                 //AverageMatrix
                 //path = "ExpCommon/src/edu/kit/exp/common/resources/QMatrix21Avg.csv";
                 //Max Matrix:
-                path = "ExpCommon/src/edu/kit/exp/common/resources/QMatrix21actions_with0.999.csv";
+                path = "ExpCommon/src/edu/kit/exp/common/resources/QMatrix21actions_with1.0_3.csv";
             }
         }
 
