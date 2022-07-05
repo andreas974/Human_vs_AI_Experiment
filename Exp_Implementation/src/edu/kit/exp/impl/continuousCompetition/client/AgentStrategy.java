@@ -542,7 +542,9 @@ public class AgentStrategy {
                 //AverageMatrix
                 //path = "ExpCommon/src/edu/kit/exp/common/resources/QMatrix21Avg.csv";
                 //Max Matrix:
-                path = "ExpCommon/src/edu/kit/exp/common/resources/QMatrix21actions_with1.0_3.csv";
+                //path = "ExpCommon/src/edu/kit/exp/common/resources/QMatrix21actions_with1.0_2.csv";
+                path = "ExpCommon/src/edu/kit/exp/common/resources/QMatrixfull_reduced_with0.998.csv";
+
             }
         }
 
@@ -575,14 +577,22 @@ public class AgentStrategy {
         }*/
 
         // Read CSV Matrix with new appearance
+        //Full QMatrix
+        double[] QMatrix_temp = new double[(actionSpace*actionSpace)];
+        double[] QMatrix = new double[(actionSpace*actionSpace)];
 
-        double[] QMatrix_temp = new double[(scaledActions*scaledActions)];
-        double[] QMatrix = new double[(scaledActions*scaledActions)];
+        //Reduced QMatrix
+        //double[] QMatrix_temp = new double[(scaledActions*scaledActions)];
+        //double[] QMatrix = new double[(scaledActions*scaledActions)];
         String delimiter = ",";
         String line;
 
-        for (int i = 0; i<(scaledActions*scaledActions); i++) {
-            for (int k = 0; k<scaledActions; k++)
+        //Full QMatrix
+        for (int i = 0; i<(actionSpace*actionSpace); i++) {
+            for (int k = 0; k<actionSpace; k++)
+        //Reduced QMatrix
+        //for (int i = 0; i<(scaledActions*scaledActions); i++) {
+            //for (int k = 0; k<scaledActions; k++)
                 try (BufferedReader br = new BufferedReader(new FileReader(path))) {
                     while ((line = br.readLine()) != null) {
 
@@ -607,8 +617,10 @@ public class AgentStrategy {
 
         //Assign Q-Matrix to firm, same Q-Matrix for all roles
 
-        //for (int i = 0, j = 0; i < (actionSpace*actionSpace) && j < (actionSpace*actionSpace); i++, j++) {
-        for (int i = 0, j = 0; i < (scaledActions*scaledActions) && j < (scaledActions*scaledActions); i++, j++) {
+        //Full QMatrix
+        for (int i = 0, j = 0; i < (actionSpace*actionSpace) && j < (actionSpace*actionSpace); i++, j++) {
+        //Reduced QMatrix
+        //for (int i = 0, j = 0; i < (scaledActions*scaledActions) && j < (scaledActions*scaledActions); i++, j++) {
                 QMatrix[j] = QMatrix_temp[i];
         }
 
@@ -646,12 +658,16 @@ public class AgentStrategy {
     }*/
 
     public void initQMatrix(double[] qliste) {
-        System.out.println("Länge q" + q.length);
-        for (int i = 0; i < q.length; i=i+5) {
-            for (int j = 0; j < q.length; j=j+5) {
-                //q[j][i] = qliste[(j % qliste.length + i * qliste.length)];
-                q[j][i] = qliste[(j/5) % 21 + (i/5) * 21];
-                //q[i][j] = qliste[k];
+        //Full QMatrix
+        for (int i = 0; i < q.length; i++) {
+            for (int j = 0; j < q.length; j++) {
+        //Reduced QMatrix
+        //for (int i = 0; i < q.length; i=i+5) {
+            //for (int j = 0; j < q.length; j=j+5) {
+                //Full Matrix with Actionspace * Actionspace
+                q[j][i] = qliste[(j % q.length + i * q.length)];
+                //Reduced Matrix:
+                //q[j][i] = qliste[(j/5) % 21 + (i/5) * 21];
             }
         }
     }
