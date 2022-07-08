@@ -1,5 +1,6 @@
 package edu.kit.exp.impl.continuousCompetition.client;
 
+import edu.kit.exp.impl.continuousCompetition.server.ContinuousCompetitionMarketDataCalculator;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import java.io.BufferedReader;
@@ -25,8 +26,7 @@ public class AgentStrategy {
 
     private int myRole;
     public int[] actionsofotherfirm = new int[3600];
-    private int actionSpace = 101;
-    private int scaledActions = 21;
+    private int actionSpace = 21;
     private double[][] q = new double[actionSpace][actionSpace];
     private int state;
     private Parameter parameter;
@@ -161,8 +161,7 @@ public class AgentStrategy {
 
         readcsv();
         initQMatrix(readcsv());
-        //printMatrix(readcsv());
-        //printq();
+        printq();
         System.out.println("Parameter gesetzt auf Alpha: " + parameter.alpha + " und Delta: " + parameter.delta);
 
         // Initial action is sent to server
@@ -254,7 +253,7 @@ public class AgentStrategy {
         log4j.info("Current Q-value: {}", q[state][myLastAction]);
 
         //Just to check Q-Matrix Updates
-        printq();
+        //printq();
 
 
         // newAction = (int) marketUpdate.getaFirmA();
@@ -444,7 +443,7 @@ public class AgentStrategy {
         //q[state][action] = (1 - parameter.alpha) * q[state][action] + parameter.alpha * (reward + parameter.delta * nextMaxQ);
 
         // Update Q-matrix cell but of maximum action
-        q[newState][getMaxActionIndex(state)] = (1 - parameter.alpha) * q[newState][action] + parameter.alpha * ((getMaxActionIndex(newState)*(60-1.8*getMaxActionIndex(newState)+1.2*newState)*1.25) + parameter.delta * nextMaxQ);
+        q[newState][getMaxActionIndex(state)] = (1 - parameter.alpha) * q[newState][action] + parameter.alpha * (((getMaxActionIndex(newState)*ContinuousCompetitionMarketDataCalculator.scale) *(60-1.8*(getMaxActionIndex(newState)*ContinuousCompetitionMarketDataCalculator.scale)+1.2*(newState*ContinuousCompetitionMarketDataCalculator.scale))*1.25) + parameter.delta * nextMaxQ);
 
         //Update all Cells of Current State (What if Scenario for Agent)
         /*for (int i=0; i<actionSpace; i=i+5){
@@ -542,7 +541,7 @@ public class AgentStrategy {
                 //AverageMatrix
                 //path = "ExpCommon/src/edu/kit/exp/common/resources/QMatrix21Avg.csv";
                 //Max Matrix:
-                path = "ExpCommon/src/edu/kit/exp/common/resources/QMatrix21actions_with1.0_2.csv";
+                path = "ExpCommon/src/edu/kit/exp/common/resources/QMatrix_with1.0_FirmA_No_8.csv";
                 //path = "ExpCommon/src/edu/kit/exp/common/resources/QMatrixfull_reduced_with0.998.csv";
 
             }
@@ -582,8 +581,7 @@ public class AgentStrategy {
         //double[] QMatrix = new double[(actionSpace*actionSpace)];
 
         //Reduced QMatrix
-        double[] QMatrix_temp = new double[(scaledActions*scaledActions)];
-        double[] QMatrix = new double[(scaledActions*scaledActions)];
+        double[] QMatrix = new double[(actionSpace*actionSpace)];
         String delimiter = ",";
         String line;
 
@@ -591,15 +589,16 @@ public class AgentStrategy {
         //for (int i = 0; i<(actionSpace*actionSpace); i++) {
             //for (int k = 0; k<actionSpace; k++)
         //Reduced QMatrix
-        for (int i = 0; i<(scaledActions*scaledActions); i++) {
-            for (int k = 0; k<scaledActions; k++)
+        for (int i = 0; i<(actionSpace*actionSpace); i++) {
+            for (int k = 0; k<actionSpace; k++)
                 try (BufferedReader br = new BufferedReader(new FileReader(path))) {
                     while ((line = br.readLine()) != null) {
 
                         //List values = Arrays.asList(line.split(delimiter));
                         //lines.add(values);
                         String[] row = line.split(delimiter);
-                        QMatrix_temp[i] = Double.parseDouble(row[k]);
+                        QMatrix[i] = Double.parseDouble(row[k]);
+                        //System.out.println("i= " + i + " k= " + k + "QMatrix= " + QMatrix[i]);
                         i++;
                     }
 
@@ -620,9 +619,6 @@ public class AgentStrategy {
         //Full QMatrix
         //for (int i = 0, j = 0; i < (actionSpace*actionSpace) && j < (actionSpace*actionSpace); i++, j++) {
         //Reduced QMatrix
-        for (int i = 0, j = 0; i < (scaledActions*scaledActions) && j < (scaledActions*scaledActions); i++, j++) {
-                QMatrix[j] = QMatrix_temp[i];
-        }
 
 
 
@@ -659,15 +655,15 @@ public class AgentStrategy {
 
     public void initQMatrix(double[] qliste) {
         //Full QMatrix
-        //for (int i = 0; i < q.length; i++) {
-            //for (int j = 0; j < q.length; j++) {
+        for (int i = 0; i < q.length; i++) {
+            for (int j = 0; j < q.length; j++) {
         //Reduced QMatrix
-        for (int i = 0; i < q.length; i=i+5) {
-            for (int j = 0; j < q.length; j=j+5) {
+        //for (int i = 0; i < q.length; i=i+5) {
+            //for (int j = 0; j < q.length; j=j+5) {
                 //Full Matrix with Actionspace * Actionspace
-                //q[j][i] = qliste[(j % q.length + i * q.length)];
+                q[j][i] = qliste[(j % q.length + i * q.length)];
                 //Reduced Matrix:
-                q[j][i] = qliste[(j/5) % 21 + (i/5) * 21];
+                //q[j][i] = qliste[(j/5) % 21 + (i/5) * 21];
             }
         }
     }

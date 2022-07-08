@@ -33,6 +33,7 @@ public class ContinuousCompetitionMarketDataCalculator {
     private static double coeff_q_duo_cournot = 0.6;
     private static double coeff_q_trio_cournot = (300/700.0);
     private static double coeff_q_quadro_cournot = (1/3.0);
+    public static double scale = 5;
 
 
     public ContinuousCompetitionMarketDataCalculator(boolean isCournotTreatment) {
@@ -455,8 +456,8 @@ public class ContinuousCompetitionMarketDataCalculator {
 
         oMarket = (oFirmA + oFirmB)/2;
 
-        profitFirmA = aFirmA * oFirmA * coeff_profit_duo_bertrand;
-        profitFirmB = aFirmB * oFirmB * coeff_profit_duo_bertrand;
+        profitFirmA = (aFirmA*scale) * oFirmA * coeff_profit_duo_bertrand;
+        profitFirmB = (aFirmB*scale) * oFirmB * coeff_profit_duo_bertrand;
 
         ContinuousCompetitionParamObject marketUpdate = new ContinuousCompetitionParamObject();
 
@@ -580,7 +581,7 @@ public class ContinuousCompetitionMarketDataCalculator {
     }
 
     private double calculateDemandFromGivenPricesInDuopoly(double p, double pOtherFirm) {
-        return (calcAlpha(2) - calcBeta(2) * p + calcGamma(2) * pOtherFirm);
+        return (calcAlpha(2) - calcBeta(2) * (p*scale) + calcGamma(2) * (pOtherFirm*scale));
     }
 
     private double calcAlpha(double n) {

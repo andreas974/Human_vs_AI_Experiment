@@ -79,7 +79,7 @@ public class ContinuousCompetitionFirmScreen extends Screen {
     protected JSlider pFirmBSlider;
     protected JSlider pFirmCSlider;
     protected int sliderMin = 0;
-    protected int sliderMax = 100;
+    protected int sliderMax = 20;
     //protected int sliderMax = 5;
     protected int sliderValue = 1;
 
@@ -1702,7 +1702,7 @@ public class ContinuousCompetitionFirmScreen extends Screen {
         slider.setValue(sliderValue);
         slider.setPaintTicks(true);
         slider.setMajorTickSpacing(5);
-        slider.setMinorTickSpacing(5);
+        slider.setMinorTickSpacing(1);
         slider.setSnapToTicks(true);
         slider.setPaintLabels(true);
 
@@ -1890,4 +1890,3 @@ public class ContinuousCompetitionFirmScreen extends Screen {
 
 
 }
-
