@@ -40,7 +40,7 @@ public class AgentStrategy {
         log4j.info("this.AgentInterface = {}", this.agentCore);
         if (agentCore.isTriopolyTreatment==false) {
             if (agentCore.isCournotTreatment==false){
-                parameter = new AgentStrategy.Parameter(0.095, 0.99);
+                parameter = new AgentStrategy.Parameter(0.165, 0.99);
             }
             else if (agentCore.isCournotTreatment==true){
                 parameter = new AgentStrategy.Parameter(0.2, 0.97);
@@ -280,7 +280,7 @@ public class AgentStrategy {
 
         if (countId > 1) {
 
-            if (getState(marketUpdate) != actionsofotherfirm[countId - 1] || countId % 40 == 0) {
+            if (getState(marketUpdate) != actionsofotherfirm[countId - 1] || countId % 40 == 0 || countId == 2) {
                 agentCore.updateAction(newAction);
 
                 log4j.info("Updated action to {}", newAction);
@@ -443,8 +443,7 @@ public class AgentStrategy {
         //q[state][action] = (1 - parameter.alpha) * q[state][action] + parameter.alpha * (reward + parameter.delta * nextMaxQ);
 
         // Update Q-matrix cell but of maximum action
-        q[newState][getMaxActionIndex(state)] = (1 - parameter.alpha) * q[newState][action] + parameter.alpha * (((getMaxActionIndex(newState)*ContinuousCompetitionMarketDataCalculator.scale) *(60-1.8*(getMaxActionIndex(newState)*ContinuousCompetitionMarketDataCalculator.scale)+1.2*(newState*ContinuousCompetitionMarketDataCalculator.scale))*1.25) + parameter.delta * nextMaxQ);
-
+        q[state][getMaxActionIndex(state)] = (1 - parameter.alpha) * q[state][action] + parameter.alpha * (((getMaxActionIndex(state)*ContinuousCompetitionMarketDataCalculator.scale) *(60-1.8*(getMaxActionIndex(newState)*ContinuousCompetitionMarketDataCalculator.scale)+1.2*(newState*ContinuousCompetitionMarketDataCalculator.scale))*1.25) + parameter.delta * nextMaxQ);
         //Update all Cells of Current State (What if Scenario for Agent)
         /*for (int i=0; i<actionSpace; i=i+5){
             q[state][i] = (1 - parameter.alpha) * q[state][i] + parameter.alpha * ((i*(60-1.8*i+1.2*state)*1.25) + parameter.delta * nextMaxQ);
@@ -541,7 +540,7 @@ public class AgentStrategy {
                 //AverageMatrix
                 //path = "ExpCommon/src/edu/kit/exp/common/resources/QMatrix21Avg.csv";
                 //Max Matrix:
-                path = "ExpCommon/src/edu/kit/exp/common/resources/QMatrix_with1.0_FirmA_No_8.csv";
+                path = "ExpCommon/src/edu/kit/exp/common/resources/QMatrix_final_with1.0_FirmA.csv";
                 //path = "ExpCommon/src/edu/kit/exp/common/resources/QMatrixfull_reduced_with0.998.csv";
 
             }

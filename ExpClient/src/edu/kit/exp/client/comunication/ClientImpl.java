@@ -34,7 +34,8 @@ public class ClientImpl implements IClient {
 	/**
 	 * The message delivery thread.
 	 */
-	@SuppressWarnings("unused") private MessageDeliveryThread<ServerMessage> messageDeliveryThread;
+	@SuppressWarnings("unused")
+	private MessageDeliveryThread<ServerMessage> messageDeliveryThread;
 
 	/**
 	 * This method gets the single instance of ClientImpl.
@@ -87,6 +88,9 @@ public class ClientImpl implements IClient {
 		messageQueue.push(new ServerSensorCommandMessage(object));
 	}
 
+	public MessageDeliveryThread<ServerMessage> getMessageDeliveryThread() {
+		return messageDeliveryThread;
+	}
 	/**
 	 * This method sets the message delivery thread for server messages.
 	 *
